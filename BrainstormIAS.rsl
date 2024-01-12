@@ -1,0 +1,50 @@
+.. _BrainstormIAS:
+
+========
+Brainstorm Tutorial : Source estimation through IAS algorithm
+========
+
+The purpose of this section it's to explain how to estimate brain activity accounting for scalp recordings using the open-source application Brainstorm.
+The dataset used for this tutorial can be downloaded directly from the Brainstorm download page.. _a link: https://neuroimage.usc.edu/bst/download.php  (sample_epilepsy.zip).
+
+Dataset description 
+=========== 
+This tutorial dataset was acquired in a patient who suffered from focal epilepsy at the Epilepsy Center Freiburg, Germany. The EEG data distributed here was recorded at 256Hz, using a Neurofile NT digital video-EEG system with 128 channels and a 16-bit A/D converter. 
+The signal was filtered in the recording system with a high-pass filter with a time constant of 1 second (cutoff frequency ~ 0.16Hz) and a low-pass filter with a cutoff frequency of 344 Hz. 
+The spikes were marked with Brainstorm by the epileptologists at the Epilepsy Center in Freiburg.
+  
+<style>
+div {
+   background-color: lightgrey;
+  width: 50px*200px;
+  border: 15px black;
+  padding: 20px;
+  margin: 5px;
+}
+</style>
+</head>
+<body>
+
+<div> Please for the anatomy import and the pre-processing of the dataset take into consideration the Brainstorm tutorial :  https://neuroimage.usc.edu/brainstorm/Tutorials/Epilepsy#Source_analysis:_Surface. <div>
+
+Source estimation 
+===========
+  
+<p>Method</p>
+
+<h3 id="IAS algorithm"></h3>
+The Iterative Alternating Sequential (IAS) algorithm is based on an iterative scheme that alternatively updates the dipole moments Q by solving a linear least squares problem 
+using a priorconditioned CGLS algorithm with sutable stopping condition and updating the hyperparameter theta by an explicit formula. 
+The algorithm requires minimal user provided input parameters:
+<ul>
+  <li>the estimated <b> signal to noise-ratio <b> (SNR)</li>
+  <li>the <b>focality parameter<b> pf the reconstructed activity</li>
+  <li>the <b>cut off<b> parameter</li>
+</ul>
+
+  .. note:: If more theoretical information about the algorithm are needed click |here|.
+
+.. |here| raw:: html
+
+   <a href="https://link.springer.com/article/10.1007/s10548-022-00926-9" target="_blank">here</a>
+   
