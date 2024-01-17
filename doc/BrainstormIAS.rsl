@@ -46,7 +46,8 @@ The algorithm requires minimal user provided input parameters:
 
 .. |here| raw:: html
 
-$ make html
+
 
    <a href="https://link.springer.com/article/10.1007/s10548-022-00926-9" target="_blank">here</a>
    
+$ make html
