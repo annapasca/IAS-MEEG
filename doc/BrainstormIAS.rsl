@@ -46,8 +46,41 @@ The algorithm requires minimal user provided input parameters:
 
 .. |here| raw:: html
 
-
-
    <a href="https://link.springer.com/article/10.1007/s10548-022-00926-9" target="_blank">here</a>
-   
+
+Running the algorithm
+===========
+<ul>
+
+<li>For running the algorithm import in the Pipeline editor of Brainstorm (Process 1) the file "Avg : SPIKE(58files)". This file contains the epoches from which it's possible to reconstruct the dipole sources;<li>
+<div class="image-container">
+            <img src="Pipeline.jpg" alt="Pipeline editor">
+        </div>
+
+<li> Then go to Add process > run process <b> Sources <b> > <b> IAS <b>;
+<div class="image-container">
+            <img src="process.jpg">
+            <img src="IAS.jpg" >
+        </div>
+<li> Select the <b> SNR (amplitude) <b> = 9.00, the <b> cut off <b> = 0.90 and the <b> Focality parameter <b> = 0.1 that promotes a wider focality;
+<li> It creates a shared inversion kernel and a source link for each file in the folder;<li>
+<li> Double-click on the source file for the average. <li>
+<div class="image-container">
+            <img src="surface_IAS.jpg" alt="Pipeline editor">
+        </div>
+<li> To display the same information re-interpolated in the volume, right-click on the source file > Cortical activation > <b>Display on MRI<b>.
+<div class="image-container">
+            <img src="MRI_IAS.jpg" alt="Pipeline editor">
+        </div>
+<li> Let's try another value for the focality parameter to see hoe it affects the source estimation.
+<li> Select Run in the Pipeline editor Process 1 > Add process > run process <b> Sources <b> > <b> IAS <b> > Select the <b> Focality parameter <b> = 0.001 that promotes a tighter focality.
+<div class="image-container">
+            <img src="MRI_IAS_02.jpg" alt="Pipeline editor">
+            <img src="surface_IAS_02.jpg" alt="Pipeline editor">
+        </div>
+
+<ul>
+
+It's possible from the images see how the Focality parameter impacts on the precision of the source estimation.
+
 $ make html
