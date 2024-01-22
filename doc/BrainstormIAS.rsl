@@ -13,34 +13,25 @@ This tutorial dataset was acquired in a patient who suffered from focal epilepsy
 The signal was filtered in the recording system with a high-pass filter with a time constant of 1 second (cutoff frequency ~ 0.16Hz) and a low-pass filter with a cutoff frequency of 344 Hz. 
 The spikes were marked with Brainstorm by the epileptologists at the Epilepsy Center in Freiburg.
   
-<style>
-div {
-   background-color: lightgrey;
-  width: 50px*200px;
-  border: 15px black;
-  padding: 20px;
-  margin: 5px;
-}
-</style>
-</head>
-<body>
+.. note:: WARNING
+Please for the anatomy import and the pre-processing of the dataset take into consideration the Brainstorm tutorial :  https://neuroimage.usc.edu/brainstorm/Tutorials/Epilepsy#Source_analysis:_Surface. 
 
-<div> Please for the anatomy import and the pre-processing of the dataset take into consideration the Brainstorm tutorial :  https://neuroimage.usc.edu/brainstorm/Tutorials/Epilepsy#Source_analysis:_Surface. <div>
+Source Estimation
+-----------------
 
-Source estimation 
-===========
-  
-<p>Method</p>
+Method
+~~~~~~
 
-<h3 id="IAS algorithm"></h3>
+### IAS Algorithm
+
 The Iterative Alternating Sequential (IAS) algorithm is based on an iterative scheme that alternatively updates the dipole moments Q by solving a linear least squares problem 
 using a priorconditioned CGLS algorithm with sutable stopping condition and updating the hyperparameter theta by an explicit formula. 
 The algorithm requires minimal user provided input parameters:
-<ul>
-  <li>the estimated <b> signal to noise-ratio <b> (SNR)</li>
-  <li>the <b>focality parameter<b> pf the reconstructed activity</li>
-  <li>the <b>cut off<b> parameter</li>
-</ul>
+
+  -the estimated **signal to noise-ratio** (SNR);
+  -the **focality parameter** pf the reconstructed activity;
+  -the **cut off** parameter.
+
 
   .. note:: If more theoretical information about the algorithm are needed click |here|.
 
@@ -48,39 +39,51 @@ The algorithm requires minimal user provided input parameters:
 
    <a href="https://link.springer.com/article/10.1007/s10548-022-00926-9" target="_blank">here</a>
 
-Running the algorithm
-===========
-<ul>
+Running the Algorithm
+---------------------
 
-<li>For running the algorithm import in the Pipeline editor of Brainstorm (Process 1) the file "Avg : SPIKE(58files)". This file contains the epoches from which it's possible to reconstruct the dipole sources;<li>
-<div class="image-container">
-            <img src="Pipeline.jpg" alt="Pipeline editor">
-        </div>
 
-<li> Then go to Add process > run process <b> Sources <b> > <b> IAS <b>;
-<div class="image-container">
-            <img src="process.jpg">
-            <img src="IAS.jpg" >
-        </div>
-<li> Select the <b> SNR (amplitude) <b> = 9.00, the <b> cut off <b> = 0.90 and the <b> Focality parameter <b> = 0.1 that promotes a wider focality;
-<li> It creates a shared inversion kernel and a source link for each file in the folder;<li>
-<li> Double-click on the source file for the average. <li>
-<div class="image-container">
-            <img src="surface_IAS.jpg" alt="Pipeline editor">
-        </div>
-<li> To display the same information re-interpolated in the volume, right-click on the source file > Cortical activation > <b>Display on MRI<b>.
-<div class="image-container">
-            <img src="MRI_IAS.jpg" alt="Pipeline editor">
-        </div>
-<li> Let's try another value for the focality parameter to see hoe it affects the source estimation.
-<li> Select Run in the Pipeline editor Process 1 > Add process > run process <b> Sources <b> > <b> IAS <b> > Select the <b> Focality parameter <b> = 0.001 that promotes a tighter focality.
-<div class="image-container">
-            <img src="MRI_IAS_02.jpg" alt="Pipeline editor">
-            <img src="surface_IAS_02.jpg" alt="Pipeline editor">
-        </div>
+1. **"Import Data":**
 
-<ul>
+- For running the algorithm import in the Pipeline editor of Brainstorm (Process 1) the file "Avg : SPIKE(58files)". This file contains the epoches from which it's possible to reconstruct the dipole sources;
+
+           .. image:: "Pipeline.jpg" 
+              :alt:= "Pipeline editor"
+     
+2. **Run IAS Algorithm:**
+
+- Then go to Add process > run process **Sources** > **IAS**;
+
+          .. image::  "process.jpg"
+          .. image:: "IAS.jpg" 
+
+3. **Configure Parameters:**
+
+- Select the **SNR (amplitude)** = 9.00, the **cut off** = 0.90 and the **Focality parameter** = 0.1 that promotes a wider focality;
+- It creates a shared inversion kernel and a source link for each file in the folder;
+
+4. **Visualize Results:**
+
+- Double-click on the source file for the average. 
+
+          .. image::  "surface_IAS.jpg" 
+        
+- To display the same information re-interpolated in the volume, right-click on the source file > Cortical activation > **Display on MRI**.
+
+          .. image::  "MRI_IAS.jpg"
+        
+- Let's try another value for the focality parameter to see hoe it affects the source estimation.
+- Select Run in the Pipeline editor Process 1 > Add process > run process **Sources** > **IAS** > Select the **Focality parameter** = 0.001 that promotes a tighter focality.
+
+         .. image:: "MRI_IAS_02.jpg" 
+
+         .. image:: "surface_IAS_02.jpg" 
 
 It's possible from the images see how the Focality parameter impacts on the precision of the source estimation.
 
-$ make html
+.. note :: Experiment with different values for the Focality Parameter to observe its impact on source estimation precision.
+
+Conclusion
+-----------
+
+This tutorial demonstrates the source estimation process using the IAS algorithm in Brainstorm. Experimenting with different parameters, including advanced options, allows you to optimize source estimation precision for your specific dataset.
