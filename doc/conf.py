@@ -14,8 +14,9 @@
 #
 import os
 import sys
-sys.path.insert(0, '/home/pasca/Dropbox/MEGSIM_public_code/public_matlab_code/IAS')
+import os.path as op
 import sphinx_rtd_theme
+import sphinx_bootstrap_theme
 
 from datetime import date
 
@@ -44,15 +45,18 @@ release = ''
 # ones.
 extensions = [
     'sphinx.ext.autodoc',
-    'sphinx.ext.todo',
+    'sphinxcontrib.matlab',
     'sphinx.ext.viewcode',
-    'sphinx.ext.mathjax',
-    'sphinx.ext.intersphinx',
-    'sphinx_click.ext',
-    'sphinxcontrib.matlab'
+    'sphinx.ext.doctest'
 ]
 
-matlab_src_dir = '/home/pasca/Dropbox/MEGSIM_public_code/public_matlab_code/'
+this_dir = os.path.dirname(os.path.abspath(__file__))
+matlab_src_dir = os.path.abspath(os.path.join(this_dir, '..'))
+print(f'matlab_src_dir -> {matlab_src_dir}')
+# matlab_src_dir = '/home/pasca/Tools/software/IAS'
+matlab_keep_package_prefix = True
+matlab_short_links = True
+matlab_auto_link = 'basic'
 
 primary_domain = 'mat'
 
