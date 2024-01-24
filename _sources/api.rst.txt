@@ -6,7 +6,7 @@ API Documentation
 
 Functions:
 
-.. currentmodule:: IAS-MEG
+.. currentmodule:: IAS-MEEG
 
 .. autofunction:: IAS_algorithm
 .. autofunction:: BuildAnatomicalPrior

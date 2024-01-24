@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Brainstorm Tutorial : Source estimation through IAS algorithm &mdash; IAS  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="API Documentation" href="api.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            IAS
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="example.html">IAS Demo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API Documentation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Brainstorm Tutorial : Source estimation through IAS algorithm</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#dataset-description">Dataset description</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#source-estimation">Source Estimation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#method">Method</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#running-the-algorithm">Running the Algorithm</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#conclusion">Conclusion</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">IAS</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Brainstorm Tutorial : Source estimation through IAS algorithm</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/BrainstormIAS.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="brainstorm-tutorial-source-estimation-through-ias-algorithm">
+<span id="brainstormias"></span><h1>Brainstorm Tutorial : Source estimation through IAS algorithm<a class="headerlink" href="#brainstorm-tutorial-source-estimation-through-ias-algorithm" title="Link to this heading">¶</a></h1>
+<p>The purpose of this section it’s to explain how to estimate brain activity accounting for scalp recordings using the open-source application Brainstorm.
+The dataset used for this tutorial can be downloaded directly from the Brainstorm download page.. _a link: <a class="reference external" href="https://neuroimage.usc.edu/bst/download.php">https://neuroimage.usc.edu/bst/download.php</a>  (sample_epilepsy.zip).</p>
+<section id="dataset-description">
+<h2>Dataset description<a class="headerlink" href="#dataset-description" title="Link to this heading">¶</a></h2>
+<p>This tutorial dataset was acquired in a patient who suffered from focal epilepsy at the Epilepsy Center Freiburg, Germany. The EEG data distributed here was recorded at 256Hz, using a Neurofile NT digital video-EEG system with 128 channels and a 16-bit A/D converter.
+The signal was filtered in the recording system with a high-pass filter with a time constant of 1 second (cutoff frequency ~ 0.16Hz) and a low-pass filter with a cutoff frequency of 344 Hz.
+The spikes were marked with Brainstorm by the epileptologists at the Epilepsy Center in Freiburg.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>WARNING</p>
+</div>
+<p>Please for the anatomy import and the pre-processing of the dataset take into consideration the Brainstorm tutorial :  <a class="reference external" href="https://neuroimage.usc.edu/brainstorm/Tutorials/Epilepsy#Source_analysis:_Surface">https://neuroimage.usc.edu/brainstorm/Tutorials/Epilepsy#Source_analysis:_Surface</a>.</p>
+<section id="source-estimation">
+<h3>Source Estimation<a class="headerlink" href="#source-estimation" title="Link to this heading">¶</a></h3>
+<section id="method">
+<h4>Method<a class="headerlink" href="#method" title="Link to this heading">¶</a></h4>
+<p>### IAS Algorithm</p>
+<p>The Iterative Alternating Sequential (IAS) algorithm is based on an iterative scheme that alternatively updates the dipole moments Q by solving a linear least squares problem
+using a priorconditioned CGLS algorithm with sutable stopping condition and updating the hyperparameter theta by an explicit formula.
+The algorithm requires minimal user provided input parameters:</p>
+<blockquote>
+<div><p>-the estimated <strong>signal to noise-ratio</strong> (SNR);
+-the <strong>focality parameter</strong> pf the reconstructed activity;
+-the <strong>cut off</strong> parameter.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If more theoretical information about the algorithm are needed click <a href="https://link.springer.com/article/10.1007/s10548-022-00926-9" target="_blank">here</a>.</p>
+</div>
+</div></blockquote>
+</section>
+</section>
+<section id="running-the-algorithm">
+<h3>Running the Algorithm<a class="headerlink" href="#running-the-algorithm" title="Link to this heading">¶</a></h3>
+<ol class="arabic simple">
+<li><p><strong>“Import Data”:</strong></p></li>
+</ol>
+<ul>
+<li><p>For running the algorithm import in the Pipeline editor of Brainstorm (Process 1) the file “Avg : SPIKE(58files)”. This file contains the epoches from which it’s possible to reconstruct the dipole sources;</p>
+<blockquote>
+<div><img alt="_images/Pipeline.jpg" src="_images/Pipeline.jpg" />
+</div></blockquote>
+</li>
+</ul>
+<ol class="arabic simple" start="2">
+<li><p><strong>Run IAS Algorithm:</strong></p></li>
+</ol>
+<ul>
+<li><p>Then go to Add process &gt; run process <strong>Sources</strong> &gt; <strong>IAS</strong>;</p>
+<blockquote>
+<div><img alt="_images/process.jpg" src="_images/process.jpg" />
+<img alt="_images/IAS.jpg" src="_images/IAS.jpg" />
+</div></blockquote>
+</li>
+</ul>
+<ol class="arabic simple" start="3">
+<li><p><strong>Configure Parameters:</strong></p></li>
+</ol>
+<ul class="simple">
+<li><p>Select the <strong>SNR (amplitude)</strong> = 9.00, the <strong>cut off</strong> = 0.90 and the <strong>Focality parameter</strong> = 0.1 that promotes a wider focality;</p></li>
+<li><p>It creates a shared inversion kernel and a source link for each file in the folder;</p></li>
+</ul>
+<ol class="arabic simple" start="4">
+<li><p><strong>Visualize Results:</strong></p></li>
+</ol>
+<ul>
+<li><p>Double-click on the source file for the average.</p>
+<blockquote>
+<div><img alt="_images/surface_IAS.jpg" src="_images/surface_IAS.jpg" />
+</div></blockquote>
+</li>
+<li><p>To display the same information re-interpolated in the volume, right-click on the source file &gt; Cortical activation &gt; <strong>Display on MRI</strong>.</p>
+<blockquote>
+<div><img alt="_images/MRI_IAS.jpg" src="_images/MRI_IAS.jpg" />
+</div></blockquote>
+</li>
+<li><p>Let’s try another value for the focality parameter to see hoe it affects the source estimation.</p></li>
+<li><p>Select Run in the Pipeline editor Process 1 &gt; Add process &gt; run process <strong>Sources</strong> &gt; <strong>IAS</strong> &gt; Select the <strong>Focality parameter</strong> = 0.001 that promotes a tighter focality.</p>
+<blockquote>
+<div><img alt="_images/MRI_IAS_02.jpg" src="_images/MRI_IAS_02.jpg" />
+<img alt="_images/surface_IAS_02.jpg" src="_images/surface_IAS_02.jpg" />
+</div></blockquote>
+</li>
+</ul>
+<p>It’s possible from the images see how the Focality parameter impacts on the precision of the source estimation.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Experiment with different values for the Focality Parameter to observe its impact on source estimation precision.</p>
+</div>
+</section>
+<section id="conclusion">
+<h3>Conclusion<a class="headerlink" href="#conclusion" title="Link to this heading">¶</a></h3>
+<p>This tutorial demonstrates the source estimation process using the IAS algorithm in Brainstorm. Experimenting with different parameters, including advanced options, allows you to optimize source estimation precision for your specific dataset.</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="api.html" class="btn btn-neutral float-left" title="API Documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, IAS Developers. Last updated on 2024-01-24.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
